@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="history-container">
+    <h1>Your Mood History</h1>
+    {% if entries %}
+        <div class="entries">
+            {% for entry in entries %}
+                <div class="entry-card">
+                    <div class="entry-date">{{ entry['date'] }}</div>
+                    <div class="mood-badges">
+                        <span class="mood-badge">{{ entry['mood1'] }}</span>
+                        <span class="mood-badge">{{ entry['mood2'] }}</span>
+                        <span class="mood-badge">{{ entry['mood3'] }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="no-entries">No mood entries yet. Start tracking your moods!</p>
+    {% endif %}
+</div>
+{% endblock %}

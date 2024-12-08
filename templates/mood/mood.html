@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mood-container">
+    <h1>How are you feeling today?</h1>
+        
+   <form method="post" action="{{ url_for('mood.select_mood') }}">
+        <div class="mood-options">
+            {% for mood in moods %}
+            <div class="mood-option">
+                <input type="checkbox" 
+                       id="{{ mood }}" 
+                       name="moods" 
+                       value="{{ mood }}" 
+                       onclick="limitSelection(this)">
+                <label class="mood-label" for="{{ mood }}">
+                    <span class="mood-circle"></span>
+                    <span class="mood-text">{{ mood }}</span>
+                </label>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="submit" class="get-insights-btn">Get Your Insights</button>
+    </form>
+</div>
+
+<script>
+function limitSelection(checkbox) {
+    var checkboxes = document.getElementsByName('moods');
+    var checkedCount = 0;
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) checkedCount++;
+    }
+    if (checkedCount > 3) {
+        checkbox.checked = false;
+    }
+}
+</script>
+{% endblock %}
